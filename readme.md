@@ -496,7 +496,17 @@ By default, GitHub does not lay out the cards side by side. To do that, you can 
 </a>
 ```
 
-## Deploy on your own Vercel instance
+# Host it yourself
+
+There are two options for self-hosting the easies and and our recommended way is
+to setup you own Vercel instance. With Vercel you can set this up with just a few
+clicks and its easy to keep up to date.
+
+Alternatively if you prefer to host this on an existing server or just don't want
+to use Vercel, you can setup the [express](http://expressjs.com/) server.
+How you host this is now up to you, be it a server in your home, AWS or otherwise.
+
+## Deploy on your own Vercel instance (recommended)
 
 #### [Check Out Step By Step Video Tutorial By @codeSTACKr](https://youtu.be/n6d4KHSKqGk?t=107)
 
@@ -537,7 +547,28 @@ Since the GitHub API only allows 5k requests per hour, my `https://github-readme
 
 You can keep your fork, and thus your private Vercel instance up to date with the upstream using GitHubs' [Sync Fork button](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork). You can also use the [pull](https://github.com/wei/pull) package created by [@wei](https://github.com/wei) to automate this process.
 
-## :sparkling_heart: Support the project
+## Deploy with Express
+
+The express server uses the Vercel config and load all the APIs using the `functions`
+objects keys to resolve the files and paths. You can also enable https by specifying
+`HTTPS_PORT`, `HTTPS_KEY` and `HTTPS_CERT`. All are required for https to be enabled
+but no error will be thrown if any are missing.
+
+### Environment variables
+
+The express server like the Vercel variant will require the `PAT_<n>` environment variables.
+In addition these optional environment variables can customize its behavior.
+
+ - `PORT` - Will set the port for the http server. Default `3000`.
+ - `HTTPS_PORT` - Will set the port for the https server. Default `3443`.
+ - `REDIRECT_HTTPS` - If `true` any request to http will be redirected to https. Default `true`.
+ - `HTTPS_KEY` - Path to SSL/TLS key file. Relative to repo root or absolute.
+ - `HTTPS_CERT` - Path to SSL/TLS cert file. Relative to repo root or absolute.
+ - `USE_HELMET` - Use the [helmet](https://www.npmjs.com/package/helmet) security middleware. Default `true`.
+ - `USE_MORGAN` - Use the [morgan](https://www.npmjs.com/package/morgan) logger middleware. Default `true`.
+ - `MORGAN_FORMAT` - Choose the morgan logger format. See [morgan](https://www.npmjs.com/package/morgan) docs. Default `combined`.
+
+# :sparkling_heart: Support the project
 
 I open-source almost everything I can and try to reply to everyone needing help using these projects. Obviously,
 this takes time. You can use this service for free.
